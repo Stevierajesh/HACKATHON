@@ -1,0 +1,48 @@
+
+
+.nav {
+    border: 1px solid #ccc;
+    border-width: 1px 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-self: center; /* « The magic. */
+}
+
+.nav li {
+    display: inline;
+     /* « More magic. */
+}
+
+.nav a {
+    display: inline-block; /* « Last bit of magic. */
+    padding: 10px;
+}
+.navbar-nav .nav-item:hover .nav-link {
+    background-color: #696b6c; 
+    color: rgb(0, 136, 255);
+}
+
+.dashboard{
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 90%;
+    text-align: center;  
+    
+
+    
+}
+.container {
+    height: 30rem; /* Set a specific height for the container */
+    border: 2px solid #ccc;
+    text-align: center;
+    background-color: #9ea7ac;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgb(6, 80, 105);
+  }
+
+.title{
+    font-size: x-large;
+}

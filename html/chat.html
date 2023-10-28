@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Verteo Chat</title>
+
+    <link rel="icon" href="../media/favicon.ico">
+
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Google Fonts API-->  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <!-- End Google Fonts API-->
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">CRM <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admindash.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="chat.html">Messages</a>
+                </li>
+            </ul>
+        </div>
+      </nav>
+      <!--Chat start-->
+      <style>
+        :root {
+          --top-white-space: 0px;
+          --profile-text-space: 5px;
+          --username-font-size: 20px;
+          
+        }
+
+        .contactContainer {
+          margin:0px;
+        }
+
+        .contactAvatar {
+          width: 65px;
+          height: auto;
+          border-radius: 50%;
+        }
+
+        .contactLeft, .contactRight {
+          width: 100%;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          padding: 0px 15px;
+          border-color: black;
+          border-style: dashed;
+          border-width:0.2px;
+        }
+
+        .contactLeft:hover, .contactRight:hover {
+          background-color:var(--primary)
+        }
+
+        .contactLeft .contactInfo {
+          padding-left : var(--profile-text-space);
+        }
+
+        .contactRight .contactInfo {
+          padding-right : var(--profile-text-space);
+          text-align    : right;
+        }
+
+        .contactUsername {
+          margin: 0px;
+          font-size: var(--username-font-size);
+        }
+
+        .contactTitle {
+          margin: 0px;
+          font-size: calc(var(--username-font-size) * 0.6);
+        }
+
+        .msgContainer {
+          width: 100%;
+        }
+
+        .msgBody {
+          min-height: 150px;
+          height: min-content;
+          margin: 0px;
+          width: 100%;
+        }
+
+        .msgContent {
+          margin-left:5px;
+        }
+
+        
+
+        .msgAvatar {
+          margin-left: 15px;
+          margin-right:7px;
+          width: 40px;
+          height: auto;
+          border-radius: 25%;
+          display: flex;
+
+        }
+
+        .msgHeader {
+          background-color: rgba(0, 0, 0, .05);
+          height: 50px;
+          display: flex;
+          align-items:center;
+          margin-bottom: 2px;
+          
+        }
+
+        .msgSender {
+          background-color: #eaeef2;
+
+        }
+
+        .msgReciever {
+          background-color: #f5e3cc;
+        }
+        .chat {
+          display: flex;
+          flex-direction:row;
+          justify-content:space-between;
+          margin:0px;
+          z-index:2;
+        }
+      </style>
+  </head>
+
+  
+  <body>
+    <div class="chat">
+      <div class="contactContainer">
+        <!--Naming convention refers to which side of the contacts list that the content will lean towards
+            They should alternate from right to left, right/left/right/left-->
+        <div class="contactLeft">
+          <img class="contactAvatar" src="../media/samplePeople/person1.jpg">
+
+          <div class="contactInfo">
+            <h2 class="contactUsername">Feebleton</h2>
+            <h3 class="contactTitle">Server Admin</h3>
+          </div>
+          
+        </div>
+        <div class="contactRight">
+
+          <div class="contactInfo">
+            <h2 class="contactUsername">Fiona</h2>
+            <h3 class="contactTitle">Avid Divorce Enjoyer</h3>
+          </div>
+
+          <img class="contactAvatar" src="../media/samplePeople/person2.jpg">
+        </div>
+        <div class="contactLeft">
+          <img class="contactAvatar" src="../media/samplePeople/person1.jpg">
+
+          <div class="contactInfo">
+            <h2 class="contactUsername">Feebleton</h2>
+            <h3 class="contactTitle">Server Admin</h3>
+          </div>
+          
+        </div>
+        <div class="contactRight">
+
+          <div class="contactInfo">
+            <h2 class="contactUsername">Fiona</h2>
+            <h3 class="contactTitle">Avid Divorce Enjoyer</h3>
+          </div>
+
+          <img class="contactAvatar" src="../media/samplePeople/person2.jpg">
+        </div>
+        
+      </div>
+      <!--Chat Window-->
+      <div class="msgContainer">
+        <!--Message from self-->
+        <div class="msgBody msgSender">
+          <div class="msgHeader">
+            <img class="msgAvatar" src="../media/samplePeople/person1.jpg">
+            <h2 class="msgUsername">Feebleton</h2>
+          </div>
+          
+          <p class="msgContent">Yo hows it goin?</p>
+        </div>
+
+        <!--Message from the other party-->
+        <div class="msgBody msgReciever">
+          <div class="msgHeader">
+            <img class="msgAvatar" src="../media/samplePeople/person2.jpg">
+            <h2 class="msgUsername">Fiona</h2>
+          </div>
+            
+          <p class="msgContent">I told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging me</p>
+        </div>
+
+
+      </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        import 'bootstrap/dist/css/bootstrap.min.css'
+    </script>
+  </body>
+</html>
