@@ -44,10 +44,55 @@
           </ul>
         </div>
       </nav>
+      
+      <style>
+        .slideImage img {
+          object-fit: fill;
+          width:100%;
+          height:auto;
+          filter: grayscale(70%);
+          scale: 1;
+          transition-property: filter, scale;
+          transition-duration: 1s;
+        }
 
+        .slideImgWrapper {
+          left:0px;
+          top:0px;
+          overflow: hidden;
+          height: auto;
+        }
+
+        .slideImage:hover img {
+          scale: 1.2;
+          filter: grayscale(0%);
+        }
+
+        .slideImageOverlay {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width:80%;
+          height:100%;
+          background-image: linear-gradient(to right, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0))
+        }
+        .slideImage {
+          position: relative;
+          width:60%;
+        }
+      </style>
   </head>
   <body>
-
+    <div class="slideImage">
+      <div class="slideImgWrapper">
+        <img src="../media/sampleImages/pillsSample.jpg">
+      </div>
+      <div class="slideImageOverlay">
+        <h1>Numbers are at an all time high</h1>
+        <p>Very cool</p>
+        <a>Read more?</a>
+      </div>
+    </div>
     
     
 
