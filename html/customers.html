@@ -51,10 +51,14 @@
     </head>
     <body>
         <p class="title text-center">CURRENT CUSTOMERS</p>
-        <div class="container">
-            <div class="dashboard" id="dashboard">
-              
-            </div>
+        <div class="container" id="customerContainer">
+            <br>
+                    <div class="square left d-flex justify-content-center align-items-center" style="margin-bottom:10px">
+                        <p style="margin-top: 2%;" id="company">User</p>
+                    </div>
+                    
+                </div>
+                
         </div>
         <br>
 
@@ -63,8 +67,42 @@
   
     <!-- <img src="../media/logo-svg.svg"> -->
 
-    <script  type="module" src="/script/src.js" >
+    <script  type="module"  >
+        const firebaseConfig = {
+        apiKey: "AIzaSyDDlO4a5nSE9sDFy1t4Z31u8BdmeYQ2b18",
+        authDomain: "csproj1-b4de7.firebaseapp.com",
+        databaseURL: "https://csproj1-b4de7-default-rtdb.firebaseio.com",
+        projectId: "csproj1-b4de7",
+        storageBucket: "csproj1-b4de7.appspot.com",
+        messagingSenderId: "445466382978",
+        appId: "1:445466382978:web:7522acdcf12fd399cc9a9b",
+        measurementId: "G-6KKC3XYB4T"
+        };
 
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        var Ref = database.ref('/Accounts/Users');
+
+
+        Ref.on('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var data = childSnapshot.val();
+                var root = childSnapshot.key
+                console.log(data.clearance);
+
+                
+                if(data.clearance == -1){
+                    var finalDiv = '<div class="square left d-flex justify-content-center align-items-center" style="margin-bottom:10px">'+
+                        '<p style="margin-top: 2%;" id="company">'+
+                            'ID: '+root+' Name: '+data.name+                            '</p></div>'
+
+                      document.getElementById('customerContainer').innerHTML+=finalDiv;
+                }
+
+                // console.log(finalDiv)
+                
+            });
+        });
 
     </script>
     

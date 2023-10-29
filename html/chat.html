@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <!-- End Google Fonts API-->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-md navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,7 +41,28 @@
               </li>
           </ul>
       </div>
-  </nav>
+  </nav> -->
+  <style>
+    @keyframes flashText {
+            0%, 100% { color: red; }
+            50% { color: blue; }
+        }
+
+        @keyframes flashBorder {
+            0%, 100% { border-color: red; }
+            50% { border-color: blue; }
+        }
+
+        .flashing-link {
+            animation: flashText 1s infinite, flashBorder 1s infinite;
+            text-decoration: none; /* Remove default underline */
+            border: 2px solid black; /* Add a black border with 2px width */
+            padding: 8px 16px; /* Add some padding for spacing */
+            display: inline-block; /* Make the link a block element to respect padding */
+            border-radius: 5px; /* Add rounded corners for aesthetic */
+        }
+</style>
+  <a href="javascript:history.go(-1)"  class="flashing-link" style="font-size: large;">Go Back</a>
       <!--Chat start-->
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -61,6 +82,7 @@
 
         #contactContainer {
           margin:0px;
+          margin-top: 2%;
           width:var(--contact-win-width);
         }
 
@@ -235,10 +257,11 @@
       </div>
       <!--Chat Window-->
       <div id="msgContainer">
-        <form action="" id="form">
+        <div id="form" >
+          
           <input type="text" id="chatInbox">
-          <a><button id="submitButton">Submit</button></a>
-        </form>
+          <a onclick="userSubmitMsg(document.getElementById('chatInbox').value)"><button id="submitButton">Submit</button></a>
+          </div>
 
         
       </div>
@@ -252,20 +275,70 @@
     </script>
 
     <script type="module">
-      import { importUserData } from "../script/upload.js";
+      import { importUserData, importChatData, exportChatData, createUpdateHook } from "../script/upload.js";
+      
+      const loginAccount = '001';
+      var clientAccount;
+      
+      window.addEventListener('load', event => {
+        const searchParams = new URLSearchParams(window.location.search);
+        var clientId = searchParams.get("Client");
 
-      const loginAccount = '004';
+        console.log(clientId)
 
-      importUserData(loginAccount).then(data => {
-        console.log(data.name);
-        console.log(data.pfp);
-        console.log(data.clearance);
-        addMsg(true, data.name, data.pfp, "My name is " + data.name)
+        clientAccount = '001';
+
+        if (clientId != null) {
+        clientAccount = clientId;
+        }
+        
+        
+
+        createUpdateHook();
+        populateChatHistory(loginAccount, clientAccount);
       })
+      
+
+
+      
+
+      function getUniqueChatHisoryId(acc1, acc2) {
+        var uniqueChatId;
+        if (acc1 < acc2) {
+          uniqueChatId = acc1 + "|" + acc2;
+        } else {
+          uniqueChatId = acc2 + "|" + acc1;
+        }
+        return uniqueChatId
+      }
+      var messageIndex = 0;
+      function populateChatHistory(acc1, acc2) {
+        const uniqueChatId = getUniqueChatHisoryId(acc1, acc2);
+
+        console.log(uniqueChatId)
+        
+         
+         importChatData(uniqueChatId).then(data => {
+          console.log(data.length==0)
+          if (data.length == 0) {populateChatHistory(acc1, acc2); return;};
+          for (let i = data.length-1; i >= 0; i--) {
+            console.log(data[i].content)
+            const content = data[i].content;
+            importUserData(data[i].sender).then(data2 => {
+              addMsg(data[i].sender == loginAccount, data2.name, data2.pfp, content);
+            })
+            
+          }
+         })
+        
+      }
+
+      
 
       function addContact(username, pfp, title) {
         
       }; 
+
       function addMsg(isSender, username, pfp, messageContents) {
         // Construct the message based on paramters given
         var fromString = '';
@@ -282,9 +355,15 @@
       };
 
       function userSubmitMsg(content) {
-        console.log(content);
-        addMsg(true, "Foobletaun", "../media/samplePeople/person3.jpg", content);
+        importUserData(loginAccount).then(data => {
+          addMsg(true, data.name, data.pfp, content)
+          importChatData(getUniqueChatHisoryId(loginAccount, clientAccount)).then(data => {
+            exportChatData(data.length, getUniqueChatHisoryId(loginAccount, clientAccount), loginAccount, content)
+          })
+        })
       }
+
+      window.userSubmitMsg = userSubmitMsg
     </script>
   </body>
 </html>

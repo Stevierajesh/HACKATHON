@@ -59,6 +59,15 @@
     height: 100%;
     border-radius: 10px;
     box-shadow: 5px 5px rgb(14, 14, 14);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .left1{
+    flex: 1; 
+    margin-left: 5%;
+    height: 100%;
+    border-radius: 10px;
+    
+    font-family: 'Space Grotesk', sans-serif;
   }
   .right{
     flex: 1; 
@@ -68,9 +77,18 @@
     box-shadow: 5px 5px rgb(14, 14, 14);
     font-family: 'Space Grotesk', sans-serif;
   }
+  .right1{
+        flex: 1; 
+ 
+    height: 100%;
+    border-radius: 10px;
+    
+    font-family: 'Space Grotesk', sans-serif;
+  }
 
 .title{
     font-size: x-large;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .bigtext{
@@ -93,3 +111,26 @@
   box-shadow: 5px 5px rgb(14, 14, 14);
   font-family: 'Space Grotesk', sans-serif;
 }
+.numtitle{
+  color: #ccc;
+  font-size: large;
+
+
+}
+.voltitle{
+  color: #ccc;
+  font-size: large;
+}
+#numUsers{
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: xx-large;
+  
+}
+
+#numVolume{
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: xx-large;
+}
+

@@ -25,9 +25,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <!-- End Google Fonts API-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href ="index.html"><link rel="stylesheet" href=>
-          <img src="/media/logo-transparent-cropped-png.png" class="navbar-image" alt="logo" ></a>
+          <img src="/media/logo-transparent-cropped-png.png" class="navbar-image" alt="logo" >
+          
+          
+          
+        
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -53,9 +58,110 @@
           </ul>
         </div>
       </nav>
+      <style>
+        .slideImage img {
+          object-fit: fill;
+          width:100%;
+          height:auto;
+          filter: grayscale(70%);
+          scale: 1;
+          transition-property: filter, scale;
+          transition-duration: 1s;
+        }
 
+        .slideImgWrapper {
+          left:0px;
+          top:0px;
+          overflow: hidden;
+          height: auto;
+        }
+
+        .slideImage:hover img {
+          scale: 1.2;
+          filter: grayscale(0%);
+        }
+
+        .slideImageOverlay {
+          color:var(--white);
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width:80%;
+          height:100%;
+          background-image: linear-gradient(to right, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0));
+          padding-right:40%;
+          padding-left:15px;
+          transition-property:background-image, padding-right;
+          transition-duration:.2s;
+        }
+
+        .slideImage:hover .slideImageOverlay {
+          padding-right:30%;
+          background-image: linear-gradient(to right, rgba(0,0,0,.9) 70%, rgba(0,0,0,0));
+          
+        }
+
+        .slideImageOverlay h1 {
+          font-size: 36px;
+          color: white;
+        }
+
+        .slideImageOverlay a {
+          border-style:solid;
+          border-radius:8px;
+          border-color:var(--white);
+          padding:2px 4px;
+          
+        }
+
+        .slideImageOverlay a:hover {
+          border-width:0px;
+          background-color:grey;
+          color: rgb(0,0,0);
+        }
+
+        .slideImage {
+          position: relative;
+          width:100%;
+          margin-top: 0%;
+        }
+        .move{
+          margin-top: 15%;
+        }
+        .info{
+          width:100%;
+          height: auto;
+          aspect-ratio: 2/1;
+        }
+        body {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+      </style>
   </head>
   <body>
+    <div class="slideImage">
+      <div class="slideImgWrapper">
+        <img src="../media/sampleImages/pillsSample.jpg">
+      </div>
+      <div class="slideImageOverlay">
+        <h1 class="move">Experimental Testing Leads to Sale of New Drug</h1>
+        <p>Verteo Biopharma, Inc., a fictional mid-sized biosciences company, is preparing to launch its cholesterol statin product, Cholecap, to the US market.</p>
+        <a href="article.html" style="text-decoration: none; color: white;">Read More</a>
+      </div>
+    </div>
+    <div class="info" style="display: flex; gap: 9px;">
+      <div class="left">
+        <div class="imGr">
+          <img src="/media/samplePeople/CEO.jpeg" alt="CEO" class="imGr1">
+        </div>
+      </div>
+      <div class="right">
+      <div class="quoteTitle text-center">Our Mission</div>
+      <p class="quote">Empowering Health, Enriching Lives: At Verteo, we believe that every innovation has the power to transform lives. Together, we're dedicated to shaping a healthier, brighter future for all." - Jarson Guy, CEO of Verteo Biopharma, Inc</p>
+      </div>
+
+    </div>
 
     
     <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -84,6 +190,13 @@
       <h1>hi</h1>
       <p>But this is sample text which would populate the page</p>
     </div> -->
+    <footer class="bg-light py-4">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2023 Verteo Biopharma, Inc. All Rights Reserved</p>
+        <p class="mb-0">1234 Elm Street, Cityville, State 12345</p>
+        <p class="mb-0">Phone: (123) 456-7890 | Email: info@verteobiopharma.com</p>
+      </div>
+    </footer>
     <script src="/script/src.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

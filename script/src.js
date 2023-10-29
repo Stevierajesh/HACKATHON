@@ -30,7 +30,7 @@ ref.on('value', function(snapshot) {
   console.log(stock);
 })
 
-/*
+
 
 ref.on('value', function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
@@ -42,4 +42,4 @@ ref.on('value', function(snapshot) {
 });
 console.log(medication1);
 console.log(medication2);
-console.log(medication3);*/
+console.log(medication3);

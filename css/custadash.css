@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
 .start{
     color: white;
     font-size: larger;
@@ -30,3 +30,27 @@
     border-radius: 8px;
 }
 
+.square{
+    margin-left: 15%;
+    margin-top: 5%;
+    height: 500px;
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: x-large;
+}
+.login-container1 {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+}
+
+#userId{
+    margin-left: 36%;
+}

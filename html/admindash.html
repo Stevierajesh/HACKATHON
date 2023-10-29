@@ -48,28 +48,39 @@
             </ul>
         </div>
     </nav>
+    <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
     </head>
     <body>
         <p class="title text-center">DASHBOARD</p>
-        <div class="container">
-            <div class="dashboard" id="dashboard">
-              
-            </div>
+        <div class="container" style="display: flex; gap: 10px;">
+                <div class="left1">
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <div class="right1">
+                    <canvas id="barChart"></canvas>
+                </div>
+            
         </div>
         <br>
         <div class="container1" style="display: flex; gap: 5px;">
             <div class="left" >
-                
+                <p class="title" style="color: white;">Quick Statistics</p>
+                <p class="numtitle"># OF USERS: </p>
+                <p id="numUsers">[]</p>
+                <p class="voltitle">TOTAL VOLUME: </p>
+                <p id="numVolume">[]</p>
+
             </div>
             <div class="right">
                 <p class="title" style="color: white;">Quick Message</p>
                
                 <div class="cont ">
                     
-                    
+                    <a href="chat.html">
                     <div class="square left d-flex justify-content-center align-items-center">
                         <p style="margin-top: 4%;">User</p>
                     </div>
+                </a>
                 </div>
             </div>
         </div>
@@ -78,7 +89,59 @@
   
     <!-- <img src="../media/logo-svg.svg"> -->
 
-    
+    <script>
+        const ctx = document.getElementById("pieChart");
+  
+        new Chart(ctx, {
+  
+          type: 'pie',
+          data: {
+            labels: [
+              'Red pill',
+              'Blue pill',
+              'YELLOW'
+            ],
+            datasets: [{
+              label: 'Inventory',
+              data: [11000, 5298, 1820]
+            }]
+          }
+        });
+        const ct1 = document.getElementById("barChart");
+
+        new Chart(ct1, {
+        type: 'bar', // Set the chart type to 'bar'
+        data: {
+            labels: [
+            'Red pill',
+            'Blue pill',
+            'YELLOW'
+            ],
+            datasets: [{
+            label: 'Inventory',
+            data: [11000, 5298, 1820],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)', // Color for 'Red pill'
+                'rgba(54, 162, 235, 0.2)', // Color for 'Blue pill'
+                'rgba(255, 206, 86, 0.2)' // Color for 'YELLOW'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)', // Border color for 'Red pill'
+                'rgba(54, 162, 235, 1)', // Border color for 'Blue pill'
+                'rgba(255, 206, 86, 1)' // Border color for 'YELLOW'
+            ],
+            borderWidth: 1 // Border width for the bars
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true // Start the y-axis at 0
+            }
+            }
+        }
+        });
+      </script>
     
     
     

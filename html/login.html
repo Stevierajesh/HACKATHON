@@ -99,16 +99,17 @@
       var database = firebase.database();
       var ref = database.ref('/Accounts/Users');
 
-
+//goes through every users we have and then compared manually if you are a user or not. 
       ref.once("value")
         .then(function(snapshot) {
           snapshot.forEach(function(childSnapshot) {
             var data = childSnapshot.val();
-            
-            // console.log(username == data.name)
-            // console.log(password == data.pass)
+   
             if(username == data.name && password == data.pass){
               console.log("login successful")
+              
+              if(data.clearance == 0){window.location.href = '/html/admindash.html'}
+              else {window.location.href = '/html/custdash.html'}
               localStorage.setItem("userCode", snapshot.val());
             } else {
               console.log("login failed")
@@ -117,7 +118,7 @@
           
          
         });
-        console.log(localstorage.getItem("userCode"));
+        // console.log(localstorage.getItem("userCode"));
       }
     </script>
 

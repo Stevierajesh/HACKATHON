@@ -15,6 +15,22 @@ const firebaseConfig = {
   //var ref = database.ref('/');
 
 
+  export function createUpdateHook() {
+
+    const ref = database.ref('/Chat')
+
+    ref.on('value', function(snapshot){
+        const data = snapshot.val();
+
+        console.log("Update")
+
+        //if (data.hasOwnProperty(getUniqueChatHisoryId(loginAccount, clientAccount))) {
+        //  populateChatHistory(loginAccount, clientAccount);
+        //}
+
+      })
+  }
+
 
   export function importUserData(userID) {
     const ref = database.ref('/Accounts/Users');
@@ -30,6 +46,28 @@ const firebaseConfig = {
             );
             throw error;
         })
+}
+
+export function importChatData(chatID) {
+    const ref = database.ref('/Chat');
+
+    return ref.once('value')
+        .then(snapshot => {
+            const data = snapshot.val();
+            if (!data.hasOwnProperty(chatID)) {return false}
+            return data[chatID]
+        })
+}
+
+export function exportChatData(ID, chatID, msgSender, msgContent) {
+    const ref = database.ref('/Chat');
+    importChatData(chatID).then(data => {
+        console.log({...{[Object.keys(data).length]: {sender: msgSender, content: msgContent}}, ...data})
+        ref.child(chatID).set({...{[Object.keys(data).length]: {sender: msgSender, content: msgContent}}, ...data})
+    })
+    
+
+    
 }
 /*
 export function getUsername(userID) {
