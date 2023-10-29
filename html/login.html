@@ -13,53 +13,113 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Verteo Homepage</title>
+    <title>Verteo</title>
 
     <link rel="icon" href="../media/favicon.ico">
 
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/custadash.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Google Fonts API-->  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <style>
+      body{
+    background-color: #f4f4f4;;
+      }
+    </style>
     <!-- End Google Fonts API-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href ="index.html"><link rel="stylesheet" href=>
-          <img src="/media/logo-transparent-cropped-png.png" class="navbar-image" alt="logo" ></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="slideshow.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register.html">Register</a>
-            </li>
-          </ul>
-        </div>
+      <a class="navbar-brand" href ="index.html"><link rel="stylesheet" href=>
+        <img src="/media/logo-transparent-cropped-png.png" class="navbar-image" alt="logo" ></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.html">Register</a>
+          </li>
+        </ul>
+      </div>
       </nav>
 
   </head>
   <body>
+    <!-- <p class="text-center logtext">LOGIN</p> -->
+    <div class="image">
+      <img src="/media/samplePeople/personLogo.jpg" class="imagePerson" style="border-radius: 1000px;">
+  </div>
+  <div class="login-container">
+    <h2 class="text-center mb-4">Login</h2>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+        </div>
+        <!-- <button type="submit" class="btn btn-primary btn-block">Submit</button> -->
+        <a href="#" onclick="loginInfo(document.getElementById('username').value, document.getElementById('password').value)"><input type="submit"></a>
 
-    
-   
-    <script src="/script/src.js"></script>
+    </form>
+</div>
+    <script>
+      function loginInfo(username, password){
+        const firebaseConfig = {
+        apiKey: "AIzaSyDDlO4a5nSE9sDFy1t4Z31u8BdmeYQ2b18",
+        authDomain: "csproj1-b4de7.firebaseapp.com",
+        databaseURL: "https://csproj1-b4de7-default-rtdb.firebaseio.com",
+        projectId: "csproj1-b4de7",
+        storageBucket: "csproj1-b4de7.appspot.com",
+        messagingSenderId: "445466382978",
+        appId: "1:445466382978:web:7522acdcf12fd399cc9a9b",
+        measurementId: "G-6KKC3XYB4T"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      var database = firebase.database();
+      var ref = database.ref('/Accounts/Users');
+
+
+      ref.once("value")
+        .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var data = childSnapshot.val();
+            
+            // console.log(username == data.name)
+            // console.log(password == data.pass)
+            if(username == data.name && password == data.pass){
+              console.log("login successful")
+              localStorage.setItem("userCode", snapshot.val());
+            } else {
+              console.log("login failed")
+            }
+          });
+          
+         
+        });
+        console.log(localstorage.getItem("userCode"));
+      }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         import 'bootstrap/dist/css/bootstrap.min.css'

@@ -9,11 +9,30 @@ const firebaseConfig = {
     measurementId: "G-6KKC3XYB4T"
   };
   
+  
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database();
   //var ref = database.ref('/');
 
-function getUsername(userID) {
+
+
+  export function importUserData(userID) {
+    const ref = database.ref('/Accounts/Users');
+    
+    return ref.once('value')
+        .then(snapshot => {
+        const data = snapshot.val();
+        return data[userID];
+        })
+        .catch(error => {
+            console.log(
+                "There was an error when getting user Data: " + error
+            );
+            throw error;
+        })
+}
+/*
+export function getUsername(userID) {
     const ref = database.ref('/Accounts/Users');
     
     return ref.once('value')
@@ -24,6 +43,38 @@ function getUsername(userID) {
         .catch(error => {
             console.log(
                 "There was an error when getting username: " + error
+            );
+            throw error;
+        })
+}
+
+export function getPfp(userID) {
+    const ref = database.ref('/Accounts/Users');
+    
+    return ref.once('value')
+        .then(snapshot => {
+        const data = snapshot.val();
+        return data[userID].pfp;
+        })
+        .catch(error => {
+            console.log(
+                "There was an error when getting profile picture: " + error
+            );
+            throw error;
+        })
+}
+
+export function getClearance(userID) {
+    const ref = database.ref('/Accounts/Users');
+    
+    return ref.once('value')
+        .then(snapshot => {
+        const data = snapshot.val();
+        return data[userID].clearance;
+        })
+        .catch(error => {
+            console.log(
+                "There was an error when getting security clearance: " + error
             );
             throw error;
         })
@@ -48,3 +99,4 @@ export function testPush() {
     ref.child("Test").set({Name:"Jerry", Bitches:0})//this is where you would upload the thing to databse. 
     console.log("lol")
 }
+*/

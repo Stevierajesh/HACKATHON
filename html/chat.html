@@ -43,11 +43,14 @@
       </div>
   </nav>
       <!--Chat start-->
+      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
       <style>
         :root {
           --top-white-space: 0px;
           --profile-text-space: 5px;
           --username-font-size: 20px;
+          --contact-win-width: 188.583px;
           
         }
 
@@ -56,12 +59,9 @@
           bottom:0px;
         }
 
-        nav {
-          position:fixed;
-        }
-
         #contactContainer {
           margin:0px;
+          width:var(--contact-win-width);
         }
 
         .contactAvatar {
@@ -165,20 +165,25 @@
         #form{
           position: fixed;
           bottom: 0px;
-          right: 0px;
-          width: 80%;
+          left:var(--contact-win-width);
+          width: auto;
           margin: 5px;
+          right:0px;
+          display:flex;
+          flex-wrap:nowrap;
+          justify-content:space-between;
         }
 
         #chatInbox{
-          width: 85%;
+          width:100%;
           border-radius: 3px;
-          margin-left: 1%;
+          display:flex;
         }
 
         #submitButton{
-          width: 12%;
+          margin-left:5px;
           border-radius: 3px;
+          display:flex;
           /* margin-left: 2%; */
         }
       </style>
@@ -230,29 +235,10 @@
       </div>
       <!--Chat Window-->
       <div id="msgContainer">
-        <form action="submit" id="form">
+        <form action="" id="form">
           <input type="text" id="chatInbox">
-          <input type="submit" id="submitButton" onclick="getChatInfo(document.getElementById('chatInbox').value)">
+          <a><button id="submitButton">Submit</button></a>
         </form>
-        <!--Message from self-->
-        <div class="msgBody msgSender">
-          <div class="msgHeader">
-            <img class="msgAvatar" src="../media/samplePeople/person1.jpg">
-            <h2 class="msgUsername">Feebleton</h2>
-          </div>
-          
-          <p class="msgContent">Yo hows it goin?</p>
-        </div>
-
-        <!--Message from the other party-->
-        <div class="msgBody msgReciever">
-          <div class="msgHeader">
-            <img class="msgAvatar" src="../media/samplePeople/person2.jpg">
-            <h2 class="msgUsername">Fiona</h2>
-          </div>
-            
-          <p class="msgContent">I told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging me</p>
-        </div>
 
         
       </div>
@@ -264,16 +250,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         import 'bootstrap/dist/css/bootstrap.min.css'
     </script>
-    <script>
+
+    <script type="module">
+      import { importUserData } from "../script/upload.js";
+
+      const loginAccount = '004';
+
+      importUserData(loginAccount).then(data => {
+        console.log(data.name);
+        console.log(data.pfp);
+        console.log(data.clearance);
+        addMsg(true, data.name, data.pfp, "My name is " + data.name)
+      })
+
       function addContact(username, pfp, title) {
         
       }; 
       function addMsg(isSender, username, pfp, messageContents) {
         // Construct the message based on paramters given
+        var fromString = '';
         if (isSender) {
                  fromString = "msgSender"
         } else { fromString = "msgReciever" }
-        finalHTML = "<div class='msgBody " + fromString + //Signs which party the message is from
+        var finalHTML = "<div class='msgBody " + fromString + //Signs which party the message is from
                     "'><div class='msgHeader'><img class='msgAvatar' src='" + pfp + // assigns the url to the image
                     "'><h2 class=msgUsername>" + username + // assigns the username
                     "</h2></div><p class='msgContent'>" + messageContents + //adds the body of the message
@@ -281,9 +280,11 @@
         console.log(finalHTML);
         document.getElementById("msgContainer").innerHTML += finalHTML;
       };
-      addMsg(true, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
-      addMsg(false, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
-      addMsg(true, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
+
+      function userSubmitMsg(content) {
+        console.log(content);
+        addMsg(true, "Foobletaun", "../media/samplePeople/person3.jpg", content);
+      }
     </script>
   </body>
 </html>
