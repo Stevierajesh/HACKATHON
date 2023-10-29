@@ -1,11 +1,3 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from firebase/app;
-import { getAnalytics } from firebase/analytics;
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDDlO4a5nSE9sDFy1t4Z31u8BdmeYQ2b18",
   authDomain: "csproj1-b4de7.firebaseapp.com",
@@ -17,16 +9,37 @@ const firebaseConfig = {
   measurementId: "G-6KKC3XYB4T"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
+firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
-  var ref = database.ref('/Accounts/Admin');
+var ref = database.ref('/Orders/Volume');
 
-  ref.on('value', function(snapshot) {
-    var data = snapshot.val();
-    // document.getElementById("your-element-id").innerHTML = data;
-    console.log(data);
-    console.log("lol");
+function getMedicationStock(data) {
+console.log(data)
+data.foreach
+//The total amount that we have - the total amount approved for investors
+// {Medication1: amount}
+
+
+return medications; //This will be a json containing the names, and the amounts
+}
+
+ref.on('value', function(snapshot) {
+  const data = snapshot.val();
+
+  stock = getMedicationStock(data);
+  console.log(stock);
+})
+
+/*
+
+ref.on('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var data = childSnapshot.val();
+    console.log(data["Johnson"])
+    // console.log(data[0].lol)
+    console.log(data.Johnson)
   });
+});
+console.log(medication1);
+console.log(medication2);
+console.log(medication3);*/

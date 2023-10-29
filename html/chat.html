@@ -19,29 +19,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <!-- End Google Fonts API-->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">CRM <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admindash.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="chat.html">Messages</a>
-                </li>
-            </ul>
-        </div>
-      </nav>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="customerchoose.html">CRM <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="sales.html">Sales</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="admindash.html">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="orders.html">Orders</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="chat.html">Messages</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
       <!--Chat start-->
       <style>
         :root {
@@ -51,7 +51,16 @@
           
         }
 
-        .contactContainer {
+        body {
+          height:100vh;
+          bottom:0px;
+        }
+
+        nav {
+          position:fixed;
+        }
+
+        #contactContainer {
           margin:0px;
         }
 
@@ -95,8 +104,11 @@
           font-size: calc(var(--username-font-size) * 0.6);
         }
 
-        .msgContainer {
+        #msgContainer {
           width: 100%;
+          position: relative;
+          overflow-y:auto;
+          height:100%;
         }
 
         .msgBody {
@@ -145,6 +157,29 @@
           justify-content:space-between;
           margin:0px;
           z-index:2;
+          height:100%;
+          bottom:0px;
+          
+          
+        }
+        #form{
+          position: fixed;
+          bottom: 0px;
+          right: 0px;
+          width: 80%;
+          margin: 5px;
+        }
+
+        #chatInbox{
+          width: 85%;
+          border-radius: 3px;
+          margin-left: 1%;
+        }
+
+        #submitButton{
+          width: 12%;
+          border-radius: 3px;
+          /* margin-left: 2%; */
         }
       </style>
   </head>
@@ -152,7 +187,7 @@
   
   <body>
     <div class="chat">
-      <div class="contactContainer">
+      <div id="contactContainer">
         <!--Naming convention refers to which side of the contacts list that the content will lean towards
             They should alternate from right to left, right/left/right/left-->
         <div class="contactLeft">
@@ -194,7 +229,11 @@
         
       </div>
       <!--Chat Window-->
-      <div class="msgContainer">
+      <div id="msgContainer">
+        <form action="submit" id="form">
+          <input type="text" id="chatInbox">
+          <input type="submit" id="submitButton" onclick="getChatInfo(document.getElementById('chatInbox').value)">
+        </form>
         <!--Message from self-->
         <div class="msgBody msgSender">
           <div class="msgHeader">
@@ -215,13 +254,36 @@
           <p class="msgContent">I told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging meI told you to stop messaging me</p>
         </div>
 
-
+        
       </div>
+      
     </div>
+    
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         import 'bootstrap/dist/css/bootstrap.min.css'
+    </script>
+    <script>
+      function addContact(username, pfp, title) {
+        
+      }; 
+      function addMsg(isSender, username, pfp, messageContents) {
+        // Construct the message based on paramters given
+        if (isSender) {
+                 fromString = "msgSender"
+        } else { fromString = "msgReciever" }
+        finalHTML = "<div class='msgBody " + fromString + //Signs which party the message is from
+                    "'><div class='msgHeader'><img class='msgAvatar' src='" + pfp + // assigns the url to the image
+                    "'><h2 class=msgUsername>" + username + // assigns the username
+                    "</h2></div><p class='msgContent'>" + messageContents + //adds the body of the message
+                    "</p></div>";
+        console.log(finalHTML);
+        document.getElementById("msgContainer").innerHTML += finalHTML;
+      };
+      addMsg(true, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
+      addMsg(false, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
+      addMsg(true, "Feebleton", "../media/samplePeople/person1.jpg", "Sheesh..");
     </script>
   </body>
 </html>

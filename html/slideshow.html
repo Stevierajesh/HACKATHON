@@ -69,13 +69,44 @@
         }
 
         .slideImageOverlay {
+          color:var(--white);
           position: absolute;
           left: 0px;
           top: 0px;
           width:80%;
           height:100%;
-          background-image: linear-gradient(to right, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0))
+          background-image: linear-gradient(to right, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0));
+          padding-right:40%;
+          padding-left:15px;
+          transition-property:background-image, padding-right;
+          transition-duration:.2s;
         }
+
+        .slideImage:hover .slideImageOverlay {
+          padding-right:30%;
+          background-image: linear-gradient(to right, rgba(0,0,0,.9) 70%, rgba(0,0,0,0));
+          
+        }
+
+        .slideImageOverlay h1 {
+          font-size: 36px;
+          color: white;
+        }
+
+        .slideImageOverlay a {
+          border-style:solid;
+          border-radius:8px;
+          border-color:var(--white);
+          padding:2px 4px;
+          
+        }
+
+        .slideImageOverlay a:hover {
+          border-width:0px;
+          background-color:grey;
+          color: rgb(0,0,0);
+        }
+
         .slideImage {
           position: relative;
           width:60%;
@@ -89,7 +120,7 @@
       </div>
       <div class="slideImageOverlay">
         <h1>Numbers are at an all time high</h1>
-        <p>Very cool</p>
+        <p>A very brief summary of sample text that covers a portion of your provided screen that informs you on the newsletter</p>
         <a>Read more?</a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
 
 .nav {
     border: 1px solid #ccc;
@@ -68,4 +68,11 @@
 
 .title{
     font-size: x-large;
+}
+
+.bigtext{
+
+    font-size: xx-large;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
 }

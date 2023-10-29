@@ -15,6 +15,7 @@ h1 {
 nav {
     margin-bottom : var(--top-white-space);
     z-index:1;
+    
 }
 
 body {
