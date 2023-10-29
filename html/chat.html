@@ -82,8 +82,9 @@
 
         #contactContainer {
           margin:0px;
-          margin-top: 2%;
           width:var(--contact-win-width);
+          height:100vh;
+          overflow-y:auto;
         }
 
         .contactAvatar {
@@ -217,42 +218,7 @@
       <div id="contactContainer">
         <!--Naming convention refers to which side of the contacts list that the content will lean towards
             They should alternate from right to left, right/left/right/left-->
-        <div class="contactLeft">
-          <img class="contactAvatar" src="../media/samplePeople/person1.jpg">
-
-          <div class="contactInfo">
-            <h2 class="contactUsername">Feebleton</h2>
-            <h3 class="contactTitle">Server Admin</h3>
-          </div>
-          
-        </div>
-        <div class="contactRight">
-
-          <div class="contactInfo">
-            <h2 class="contactUsername">Fiona</h2>
-            <h3 class="contactTitle">Avid Divorce Enjoyer</h3>
-          </div>
-
-          <img class="contactAvatar" src="../media/samplePeople/person2.jpg">
-        </div>
-        <div class="contactLeft">
-          <img class="contactAvatar" src="../media/samplePeople/person1.jpg">
-
-          <div class="contactInfo">
-            <h2 class="contactUsername">Feebleton</h2>
-            <h3 class="contactTitle">Server Admin</h3>
-          </div>
-          
-        </div>
-        <div class="contactRight">
-
-          <div class="contactInfo">
-            <h2 class="contactUsername">Fiona</h2>
-            <h3 class="contactTitle">Avid Divorce Enjoyer</h3>
-          </div>
-
-          <img class="contactAvatar" src="../media/samplePeople/person2.jpg">
-        </div>
+        
         
       </div>
       <!--Chat Window-->
@@ -275,7 +241,7 @@
     </script>
 
     <script type="module">
-      import { importUserData, importChatData, exportChatData, createUpdateHook } from "../script/upload.js";
+      import { importUserData, importChatData, exportChatData, createUpdateHook, userInfo } from "../script/upload.js";
       
       const loginAccount = '001';
       var clientAccount;
@@ -295,7 +261,9 @@
         
 
         createUpdateHook();
+        
         populateChatHistory(loginAccount, clientAccount);
+        populateContacts();
       })
       
 
@@ -333,11 +301,51 @@
         
       }
 
+      function changeMessenger(nClientId) {
+        clientAccount = nClientId;
+        document.getElementById('msgContainer').innerHTML = ''
+        populateChatHistory(loginAccount, clientAccount);
+      }
+
+      function addContact(ID, username, pfp, clearance) {
+        const Titles = [
+          'Customer',
+          'Systems admin',
+          'IT',
+          'Doctor'
+          ]
+        
+        const title = Titles[clearance + 1]
+
+        
+
+        const finalHTML = "<a onclick='changeMessenger()'><div class='contactLeft'><img class='contactAvatar' src='" + pfp +
+                    "'></img><div class='contactInfo'><h2 class='contactUsername'>" + username +
+                    "</h2><h3 class='contactTitle'>" + title + "</h3></div></div></a>"
+        document.getElementById('contactContainer').innerHTML += finalHTML;
       
 
-      function addContact(username, pfp, title) {
-        
+      
+      
+      
       }; 
+
+      
+
+      function populateContacts() {
+        userInfo()
+          .then(data => {
+            
+            for(let i = 0; i <= Object.keys(data).length-1; i++) {
+              var nData = data[Object.keys(data)[i]];
+              console.log(nData);
+              console.log(i)
+              addContact(Object.keys(data)[i], nData.name, nData.pfp, nData.clearance)
+            }
+          })
+      }
+
+      
 
       function addMsg(isSender, username, pfp, messageContents) {
         // Construct the message based on paramters given

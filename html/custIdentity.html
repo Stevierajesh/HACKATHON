@@ -99,6 +99,8 @@
       
       firebase.initializeApp(firebaseConfig);
       var database = firebase.database();
+      var userRef = database.ref('/Accounts/Users')
+      var userVal = localStorage.getItem("registeredID");
 
       var Ref = database.ref('/PendingUsers')
       Ref.once("value")
@@ -106,10 +108,12 @@
           var Key = snapshot.key;
           var dataValue = snapshot.val();
           
-          var userId = "00" + snapshot.numChildren().toString();
+          var userId = "00" + (snapshot.numChildren()+1).toString();
           // dataRef.child(userId).set({Email: contact, Name: name, Verifaction: false});
-          var userVal = localStorage.getItem("registeredID");
+          
+          console.log(userVal)
           if(key == userVal){
+            userRef.child(key).set({clearance: -1, name: dataValue.Name, pass: dataValue.Email, pfp: '#'})
             var dataRef = database.ref('/PendingUsers/' + key + '/Verifaction');
             dataRef.set(true);
           }

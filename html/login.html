@@ -78,7 +78,7 @@
             <input type="password" class="form-control" id="password" placeholder="Enter your password">
         </div>
         <!-- <button type="submit" class="btn btn-primary btn-block">Submit</button> -->
-        <a href="#" onclick="loginInfo(document.getElementById('username').value, document.getElementById('password').value)"><input type="submit"></a>
+        <a href="#" onclick="loginInfo(document.getElementById('username').value, document.getElementById('password').value)">SUBMIT</a>
 
     </form>
 </div>
@@ -100,6 +100,8 @@
       var ref = database.ref('/Accounts/Users');
 
 //goes through every users we have and then compared manually if you are a user or not. 
+      console.log(username)
+      console.log(password)
       ref.once("value")
         .then(function(snapshot) {
           snapshot.forEach(function(childSnapshot) {

@@ -57,16 +57,16 @@
             </div> -->
             <div class="container" id="orderContainer" style="background-color: rgb(100, 119, 100);">
                 <br>
-                <!-- <div class="square left d-flex  align-items-center">
-                    
-                    <p style="margin-top: 2%; margin-left: 5%;" id="company">User</p>
-                   
+
+                <div class="square left d-flex  align-items-center">
+                    <p style="margin-top: 2%; margin-left: 5%;" id="company">User</p> 
                     <span class="button-container" style="margin-left: 70%;">
                         <span id="volume" >#</span>
                         <button class="button" style="background-color: green;" id="accept">Accept</button>
                         <button class="button" id="reject">Reject</button>
                       </span>
-                </div> -->
+                </div>
+
             </div>
         </div>
         <br>
@@ -104,16 +104,14 @@
                 var root = childSnapshot.key
                 console.log(root);
 
-                var finalDiv = '<div class="square left d-flex  align-items-center"><br>'+
-                    '<div class="square left d-flex  align-items-center">'+
-                        '<p style="margin-top: 2%; margin-left: 5%;" id="company">' + 
-                           "ID: "+root+" Name: "+data.name+" Cholecap: "+data.Cholecap+" Gene: "+data.Gene+" Monocloan: "+data.Monocloan  
-                            + '</p>'+
-                        '<span class="button-container" style="margin-left: 70%;">'+
-                        '<span id="volume" >#</span>'+
-                        '<button class="button" style="background-color: green;" id="accept">Accept</button>'+
-                        '<button class="button" id="reject">Reject</button>'+
-                      '</span></div></div>'
+                var finalDiv = '<div class="square left d-flex  align-items-center" style="margin-top:2%;">'+
+                            '<p style="margin-top: 2%; margin-left: 5%;" id="company"><strong>UserID:</strong> '+
+                                root+' '+data.name+' <strong>Cholecap:</strong> '+data.Cholecap+' <strong>Gene:</strong> '+data.Gene+' <strong>Monocloan:</strong> '+data.Monocloan
+                                '</p>'+
+                            '<span class="button-container" style="margin-left: 70%;">'+
+                            '<span id="volume" >#</span>'+
+                            '<button class="button" style="background-color: green;" id="accept">Accept</button>'+
+                            '<button class="button" id="reject">Reject</button></span></div>'
 
                       document.getElementById('orderContainer').innerHTML+=finalDiv;
 

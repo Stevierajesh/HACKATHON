@@ -5,11 +5,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script>
+    <!-- <script>
         // Initialize Firebase with your configuration
         firebase.initializeApp(firebaseConfig);
     </script>
-    
+     -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -97,11 +97,12 @@
       function getChatInfo(name, contact){
         var dataRef = database.ref('/PendingUsers')
         var data = database.ref('/Accounts/Users')
-
-        data.once("value")
+        console.log(name);
+        console.log(contact)
+        dataRef.once("value")
         .then(function(snapshot) {  
-          var userId = "00" + snapshot.numChildren().toString();
-          dataRef.child(userId).set({Email: contact, Name: name, Verifaction: false});
+          var userId = "00" + (snapshot.numChildren()+1).toString();
+          data.child(userId).set({Email: contact, Name: name, Verifaction: false});
           localStorage.setItem("registeredID", userId)
         });
         

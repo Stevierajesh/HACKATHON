@@ -48,6 +48,15 @@ const firebaseConfig = {
         })
 }
 
+export function userInfo() {
+    const ref = database.ref('/Accounts/Users');
+    return ref.once('value')
+        .then(snapshot => {
+            const data = snapshot.val();
+            return data;
+        })
+}
+
 export function importChatData(chatID) {
     const ref = database.ref('/Chat');
 
